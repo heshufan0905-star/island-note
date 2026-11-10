@@ -1,0 +1,50 @@
+<!doctype html>
+<!-- One note. macOS shell provides a transparent floating panel; browser mode is a preview. -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>随手记 · 灵动岛</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<section class="dock" data-edge="top" aria-label="随手记灵动岛">
+ <div class="shell">
+  <button class="trigger" aria-label="打开随手记" aria-expanded="false" aria-controls="panel"><span class="eyes" aria-hidden="true"><i class="eye"></i><i class="eye"></i></span></button>
+  <button class="idle-indicator" id="idle-indicator" aria-label="查看提醒" hidden></button>
+  <div class="panel" id="panel" inert>
+   <header class="header">
+    <h1 class="heading" id="note-heading">随手记</h1>
+<nav class="main-tabs" aria-label="内容"><button id="notes-tab" aria-selected="true" role="tab">便签</button><button id="files-tab" aria-selected="false" role="tab">文件 <span id="file-count" hidden></span></button></nav>
+    <button class="back" id="back" hidden aria-label="返回便签"><svg viewBox="0 0 20 20"><path d="m12 5-5 5 5 5"/></svg>设置</button>
+    <div class="actions"><button class="icon-button" id="unread-button" aria-label="打开未读 App" hidden></button><button class="icon-button" id="quota-refresh" aria-label="刷新额度" title="刷新" hidden><svg viewBox="0 0 20 20"><path d="M15.5 6.2A6 6 0 1 0 16 12M15.5 3.5v3.6h-3.6"/></svg></button><div class="quota-readout" id="tools-button" role="img" aria-label="Codex Pro 额度剩余 —"><svg viewBox="0 0 28 28" aria-hidden="true"><circle class="mini-track" cx="14" cy="14" r="10.5"/><circle class="mini-progress" cx="14" cy="14" r="10.5" pathLength="100" stroke-dasharray="100 100"/></svg><span class="quota-copy"><span class="quota-name">Codex Pro</span><span class="mini-value">剩余 —</span></span></div>
+     <button class="icon-button" id="pin" aria-label="固定展开" title="固定展开" aria-pressed="false"><svg viewBox="0 0 20 20"><path d="m7 3 6 0-1 5 3 3H5l3-3-1-5ZM10 11v6"/></svg></button>
+     <button class="icon-button" id="settings-button" aria-label="打开设置" title="设置"><svg viewBox="0 0 20 20"><path d="m8 3 .5-1h3l.5 2 2 .9 1.8-.4 1.5 2.6-1.3 1.4v2.8l1.3 1.4-1.5 2.6-1.8-.4-2 .9-.5 2h-3l-.5-2-2-.9-1.8.4-1.5-2.6L4 11.3V8.5L2.7 7.1l1.5-2.6 1.8.4L8 4Z"/><circle cx="10" cy="10" r="2.5"/></svg></button>
+    </div>
+   </header>
+
+   <div class="view" id="files-view" hidden><div class="file-scroll"><div id="drop-zone"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 10h8l3 4h9v11H6zM16 3v7m-3-3 3 3 3-3"/></svg><button class="text-button" id="choose-files">添加文件</button></div><div id="file-list"></div></div><footer class="footer"><span></span><button class="text-button" id="clear-files" disabled>清空入口</button></footer></div>
+   <div class="view" id="tools-view" hidden><div class="settings-scroll"><div id="agent-details"></div><div class="group"><div class="setting-label">消息提醒</div><div id="unread-details"></div></div></div></div>
+   <div class="view" id="note-view">
+    <div class="note-scroll" id="editor" role="group" aria-label="便签内容"></div>
+    <footer class="footer"><button class="add-task" id="add-task"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="3"/><path d="m5 8 2 2 4-4"/></svg>添加待办</button><span class="save-status" role="status" aria-live="polite"></span></footer>
+   </div>
+   <div class="view" id="settings-view" hidden>
+    <div class="settings-scroll settings-grid">
+     <div class="group"><div class="setting-label">主题皮肤</div><div id="themes" class="theme-grid" data-setting="theme"><button data-value="warm"><span class="theme-preview warm"><i></i><i></i></span>暖纸幽灵</button><button data-value="glass"><span class="theme-preview glass"><i></i><i></i></span>柔光玻璃</button><button data-value="ink"><span class="theme-preview ink"><i></i><i></i></span>墨色幽灵</button><button data-value="pink"><span class="theme-preview pink"><i></i><i></i></span>少女淡粉</button><button data-value="miffy"><span class="theme-preview miffy"><img src="native/assets/miffy-reference.png" alt=""></span>米菲</button></div></div>
+     <div class="group"><div class="setting-label">停靠位置</div><div class="segments" data-setting="edge" aria-label="停靠位置"><button data-value="top">顶部中央</button><button data-value="left">左侧</button><button data-value="right">右侧</button></div></div>
+     <div class="group"><div class="setting-label">纸面颜色</div><div class="color-row"><div class="swatches" data-setting="color" aria-label="纸面颜色"><button class="swatch" style="background:#fffefa" data-value="white" aria-label="纸白" title="纸白"></button><button class="swatch" style="background:#faf8f3" data-value="warm" aria-label="暖白" title="暖白"></button><button class="swatch" style="background:#f0f1ed" data-value="gray" aria-label="浅灰" title="浅灰"></button></div><span class="color-name" hidden>暖白</span></div></div>
+     <div class="group"><div class="setting-label">文字大小</div><div class="segments" data-setting="size" aria-label="文字大小"><button data-value="small">小</button><button data-value="standard">标准</button><button data-value="large">大</button></div></div>
+     <div class="group"><label class="setting-label" for="hover-toggle">悬停展开<input class="switch" id="hover-toggle" type="checkbox" role="switch"></label><div class="delay-row"><label for="delay">展开延迟</label><select id="delay"><option value="0">立即</option><option value="180">180 ms</option><option value="400">400 ms</option></select></div></div>
+     <div class="group"><label class="setting-label" for="opacity">不透明度 <output id="opacity-value" for="opacity">100%</output></label><input id="opacity" type="range" min="35" max="100" step="1" value="100" aria-label="不透明度"></div>
+     <div class="group"><label class="setting-label" for="codex-enabled">Codex 额度<input type="checkbox" class="switch" id="codex-enabled" role="switch"></label><p class="setting-note" id="codex-status">只连接已订阅的 Codex</p><button class="text-button" id="refresh-agents">刷新额度</button></div>
+     <div class="group"><div class="setting-label">消息提醒<button class="text-button" id="check-unread">检查兼容性</button></div><button class="text-button" id="unread-permission">前往辅助功能授权</button><div id="unread-settings"></div></div>
+     <p class="setting-note" id="environment-note"></p>
+    </div>
+   </div>
+  </div>
+ </div>
+</section><div id="toast" role="status" aria-live="polite" hidden></div>
+<script src="app.js"></script>
+<script src="v2.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+# Build products and local snapshots
+.build/
+dist/
+.DS_Store
+*.log
+*.zip
+
+# Local artwork and development demos are not licensed for redistribution
+native/assets/*
+!native/assets/README.md
+prototypes/
+
+# Personal screenshots from development
+/*.png
+/*.jpg
+/*.jpeg
+
+# Local credentials and runtime data
+.env
+.env.*
+*.pem
+*.key
+note-v1.json
+files-v2.json
+position-v1.json
+codex-quota-v2.json
+auth.json
